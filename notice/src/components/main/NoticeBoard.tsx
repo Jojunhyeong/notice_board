@@ -1,18 +1,23 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom"; // 추가
 import styled from "styled-components";
+import write from "../../assets/write.png"
+import search from "../../assets/search.png"
+import { Write } from "../write/Write";
 
 const NoticeContainer = styled.div`
     width: 145vh;
     height: 80vh;
     background-color: white;
     position: relative;
-    margin-left: 25vh;
+    margin-left: 50%;
+    transform: translate(-50%);
     margin-top: 12vh;
     border-radius: 1vh;
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
     position: absolute;
     width: 140vh;
     top: 2vh;
@@ -30,7 +35,7 @@ const InputContainer = styled.div`
 `;
 
 const StyledInput = styled.input`
-    width: 90%;
+    width: 87%;
     padding: 1vh 1.5vh;
     border: 1px solid #ced4da;
     border-radius: 5px;
@@ -59,21 +64,44 @@ const StyledLabel = styled.label`
     }
 `;
 
+const WriteImage = styled.img`
+position: absolute;
+height: 20px;
+left: 10px;
+`
+const SearchImage = styled.img`
+position: absolute;
+height: 20px;
+left: 10px;
+`
 const StyledButton = styled.button`
     position: absolute;
-    right: 0;
-    height: 100%; 
+    right: 10px;
+    width: 80px;
+    height: 38px; 
     padding: 0 2vh; 
     background-color: #0066ff;
     color: white;
     white-space: nowrap;
-    display: flex; 
+    text-align: end;
     align-items: center; 
     justify-content: center; 
     font-size: 16px;
 `;
 
-
+const WriteButton = styled.button`
+    position: absolute;
+    right: 0;
+    height: 38px; 
+    width: 100px;
+    padding: 0 2vh; 
+    background-color: #0066ff;
+    color: white;
+    white-space: nowrap;
+  text-align: right;
+    align-items: center; 
+    font-size: 16px;
+`;
 
 const TableContainer = styled.div`
     margin-top: 2vh;
@@ -82,21 +110,35 @@ const TableContainer = styled.div`
 
     table {
         width: 100%;
-        border-collapse: collapse; /* 테두리 겹침 방지 */
+        border-collapse: collapse;
     }
 
     th, td {
-        border-bottom: 1px solid #dee2e6; /* 경계선 추가 */
-        padding: 2vh; /* 줄 간격 증가 */
+        border-bottom: 1px solid #dee2e6;
+        padding: 2vh;
         text-align: center;
     }
 
     thead {
-        background-color: #f8f9fa; /* 헤더 배경색 */
+        background-color: #f8f9fa;
+    }
+
+    /* 제목 링크 스타일 */
+    .post-link {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .post-link:hover {
+        text-decoration: underline;
     }
 `;
 
 export const NoticeBoard = () => {
+
+    const navigate = useNavigate();
+
     return (
         <NoticeContainer>
             <StyledForm>
@@ -109,8 +151,14 @@ export const NoticeBoard = () => {
                     <StyledLabel htmlFor="floatingInputValue">
                         제목, 작성자 검색
                     </StyledLabel>
-                    <StyledButton>검색</StyledButton>
+                    <StyledButton>
+                        <SearchImage src={search}/>
+                        검색</StyledButton>
                 </InputContainer>
+                <WriteButton type="button" onClick={() => {navigate("/write")}}>
+                    <WriteImage src={write}/>
+                    글쓰기
+                </WriteButton>
 
                 <TableContainer>
                     <table>
@@ -128,7 +176,11 @@ export const NoticeBoard = () => {
                             <tr>
                                 <td>1</td>
                                 <td>공지사항</td>
-                                <td>2025년 봄 신제품 출시 안내</td>
+                                <td>
+                                    <Link to="/post/1" className="post-link">
+                                        2025년 봄 신제품 출시 안내
+                                    </Link>
+                                </td>
                                 <td>김지원</td>
                                 <td>2025-03-19</td>
                                 <td>2103</td>
@@ -136,7 +188,11 @@ export const NoticeBoard = () => {
                             <tr>
                                 <td>2</td>
                                 <td>공지사항</td>
-                                <td>개발자 채용 공고</td>
+                                <td>
+                                    <Link to="/post/2" className="post-link">
+                                        개발자 채용 공고
+                                    </Link>
+                                </td>
                                 <td>이현우</td>
                                 <td>2025-03-17</td>
                                 <td>850</td>
@@ -144,7 +200,11 @@ export const NoticeBoard = () => {
                             <tr>
                                 <td>3</td>
                                 <td>자유게시판</td>
-                                <td>신입 개발자 스터디 모집</td>
+                                <td>
+                                    <Link to="/post/3" className="post-link">
+                                        신입 개발자 스터디 모집
+                                    </Link>
+                                </td>
                                 <td>박서연</td>
                                 <td>2025-03-16</td>
                                 <td>1250</td>

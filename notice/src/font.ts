@@ -12,3 +12,7 @@ font-size: 2.5vh;
 export const DetailText = styled.div`
 font-size: 1.8vh;
 `
+
+export const ContextText = styled.div`
+font-size: 2.0vh;
+`
